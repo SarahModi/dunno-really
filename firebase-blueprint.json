@@ -1,0 +1,116 @@
+{
+  "entities": {
+    "users": {
+      "description": "User profiles for neighborhood residents and cloud kitchen staff",
+      "fields": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "description": "User email address" },
+        "displayName": { "type": "string", "description": "Resident or staff display name" },
+        "phone": { "type": "string", "description": "Mobile contact number for delivery/gate entry" },
+        "role": { "type": "string", "description": "User role: customer, staff, or admin" },
+        "loyaltyPoints": { "type": "number", "description": "Drool Bites rewards point balance" },
+        "savedLocation": { "type": "object", "description": "Default PG or society location" },
+        "unitOrRoom": { "type": "string", "description": "Flat, unit, or room number" },
+        "towerOrBlock": { "type": "string", "description": "Tower, block, or wing name" },
+        "specialInstructions": { "type": "string", "description": "Gate security or guard delivery instructions" },
+        "dietaryPreference": { "type": "string", "description": "veg, non-veg, or mix preference" },
+        "favoriteItemIds": { "type": "array", "description": "List of favorite dish IDs for 1-tap reorder" },
+        "createdAt": { "type": "string", "description": "ISO timestamp of registration" }
+      }
+    },
+    "menu_items": {
+      "description": "Live cloud kitchen menu items with stock availability and popularity signals",
+      "fields": {
+        "id": { "type": "string", "description": "Dish identifier" },
+        "name": { "type": "string", "description": "Dish title" },
+        "category": { "type": "string", "description": "Menu category (Thalis, Biryanis, Rolls, etc.)" },
+        "price": { "type": "number", "description": "Price in INR" },
+        "description": { "type": "string", "description": "Ingredients and culinary description" },
+        "imageUrl": { "type": "string", "description": "Dish photography URL" },
+        "inStock": { "type": "boolean", "description": "Real-time kitchen inventory availability (86 status)" },
+        "isVeg": { "type": "boolean", "description": "Vegetarian flag" },
+        "isSpicy": { "type": "boolean", "description": "Spicy flag" },
+        "heatLevel": { "type": "number", "description": "Chili heat rating from 1 to 5" },
+        "rating": { "type": "number", "description": "Customer review rating out of 5" },
+        "reviewCount": { "type": "number", "description": "Total customer ratings" },
+        "badge": { "type": "string", "description": "Highlight badge e.g. Best Seller, Chef Special" },
+        "prepTimeMinutes": { "type": "number", "description": "Average kitchen cook time in minutes" },
+        "calories": { "type": "number", "description": "Calorie count" },
+        "options": { "type": "array", "description": "Customizable add-ons (extra cheese, raita, etc.)" },
+        "popularInSocieties": { "type": "array", "description": "List of society IDs where this dish is popular" },
+        "orderCount": { "type": "number", "description": "Historical order count for popularity ranking" }
+      }
+    },
+    "orders": {
+      "description": "Live customer orders and dispatch telemetry",
+      "fields": {
+        "id": { "type": "string", "description": "Unique order ID" },
+        "orderNumber": { "type": "string", "description": "Display order number e.g. 1042" },
+        "userId": { "type": "string", "description": "Customer Auth UID" },
+        "customerName": { "type": "string", "description": "Customer name" },
+        "customerPhone": { "type": "string", "description": "Customer phone" },
+        "items": { "type": "array", "description": "List of ordered dishes with quantities and options" },
+        "totalAmount": { "type": "number", "description": "Total order amount in INR" },
+        "status": { "type": "string", "description": "confirmed, kitchen_prep, packed, out_for_delivery, delivered" },
+        "location": { "type": "object", "description": "Delivery destination society or PG" },
+        "addressDetails": { "type": "object", "description": "Room, tower, and gate instructions" },
+        "rider": { "type": "object", "description": "Assigned rider info, GPS coordinates, ETA, and delivery OTP" },
+        "payment": { "type": "object", "description": "Payment method and status" },
+        "societyId": { "type": "string", "description": "Society identifier for batch grouping" },
+        "createdAt": { "type": "string", "description": "Order placement ISO timestamp" },
+        "updatedAt": { "type": "string", "description": "Last status update ISO timestamp" }
+      }
+    },
+    "group_sessions": {
+      "description": "Collaborative flatmate group ordering sessions",
+      "fields": {
+        "roomId": { "type": "string", "description": "Unique room code e.g. ROOM-304-SUN" },
+        "hostUserId": { "type": "string", "description": "Host Auth UID" },
+        "hostName": { "type": "string", "description": "Host flatmate name" },
+        "societyName": { "type": "string", "description": "Society name" },
+        "societyId": { "type": "string", "description": "Society ID" },
+        "roomOrFlat": { "type": "string", "description": "Host room or flat number" },
+        "status": { "type": "string", "description": "active or locked" },
+        "items": { "type": "array", "description": "Aggregated cart items labeled with flatmate names" },
+        "memberNames": { "type": "array", "description": "List of participating flatmates" },
+        "createdAt": { "type": "string", "description": "Room creation timestamp" },
+        "lockedAt": { "type": "string", "description": "Tray lock timestamp" }
+      }
+    },
+    "subscriptions": {
+      "description": "Recurring daily tiffin and meal plans for PG residents",
+      "fields": {
+        "id": { "type": "string", "description": "Subscription ID" },
+        "userId": { "type": "string", "description": "Resident Auth UID" },
+        "planName": { "type": "string", "description": "Tiffin package name" },
+        "planType": { "type": "string", "description": "lunch_dinner, dinner_only, or weekend_feast" },
+        "dietaryPreference": { "type": "string", "description": "veg, non-veg, or mix" },
+        "pricePerWeek": { "type": "number", "description": "Weekly subscription price in INR" },
+        "description": { "type": "string", "description": "Plan inclusions" },
+        "deliverySlot": { "type": "string", "description": "Scheduled delivery time window" },
+        "location": { "type": "object", "description": "PG or society address" },
+        "roomOrFlat": { "type": "string", "description": "Delivery room number" },
+        "recipientName": { "type": "string", "description": "Recipient name" },
+        "recipientPhone": { "type": "string", "description": "Recipient phone" },
+        "status": { "type": "string", "description": "active, paused, or cancelled" },
+        "startDate": { "type": "string", "description": "Plan start date" },
+        "pausedDates": { "type": "array", "description": "List of skipped calendar dates (YYYY-MM-DD)" },
+        "autoRenew": { "type": "boolean", "description": "Whether plan auto-renews weekly" },
+        "mealsRemaining": { "type": "number", "description": "Remaining meal credits" }
+      }
+    },
+    "societies": {
+      "description": "Neighborhood delivery zones and gated societies",
+      "fields": {
+        "id": { "type": "string", "description": "Society identifier" },
+        "name": { "type": "string", "description": "Society or PG name" },
+        "type": { "type": "string", "description": "pg, coliving, or society" },
+        "zone": { "type": "string", "description": "Neighborhood zone" },
+        "distanceKm": { "type": "number", "description": "Distance from cloud kitchen in km" },
+        "deliveryMin": { "type": "number", "description": "Average delivery transit time" },
+        "activeBatchOrders": { "type": "number", "description": "Active pooled orders count" },
+        "topDishes": { "type": "array", "description": "Most popular dishes in this society" }
+      }
+    }
+  }
+}

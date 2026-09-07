@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .seductive-glow {
+    box-shadow: 0 16px 40px -12px rgba(225, 29, 72, 0.2), 0 4px 20px -4px rgba(245, 158, 11, 0.25);
+  }
+  .seductive-card {
+    background: #ffffff;
+    border: 1px solid rgba(251, 146, 60, 0.25);
+    box-shadow: 0 10px 30px -10px rgba(180, 83, 9, 0.08), 0 4px 12px -2px rgba(225, 29, 72, 0.05);
+  }
+  .seductive-card:hover {
+    border-color: rgba(225, 29, 72, 0.4);
+    box-shadow: 0 20px 40px -12px rgba(225, 29, 72, 0.16), 0 8px 24px -4px rgba(245, 158, 11, 0.18);
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
